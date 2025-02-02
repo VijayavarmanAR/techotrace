@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NovaTrace - Dashboard</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <link rel="stylesheet" type="text/css" href="/assets/css/home.css">
+        <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <link rel="stylesheet" href="/assets/css/chatbot.css">
+        <script>
+            // Firebase initialization (make sure your config is set correctly)
+            var firebaseConfig = {
+                apiKey: "AIzaSyD77IDHmttj8uPM31hGvKoTa5iCCpHC9HI",
+                authDomain: "techotrace-82ea4.firebaseapp.com",
+                projectId: "techotrace-82ea4",
+                storageBucket: "techotrace-82ea4.firebasestorage.app",
+                messagingSenderId: "349936211188",
+                appId: "1:349936211188:web:facaead53e0bbd12fafaa1"
+            };
+            // Initialize Firebase
+            firebase.initializeApp(firebaseConfig);
+
+            // Set persistence to LOCAL so the session persists after page reload
+            firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+                .then(function() {
+                    // This will be fired when the user is logged in
+                    firebase.auth().onAuthStateChanged((user) => {
+                        if (!user) {
+                            window.location.href = "landing.html"; // Redirect to login page if not logged in
+                        } else {
+                            // Populate user info in the UI
+                            document.getElementById("userName").textContent = user.email || "User";
+                            document.getElementById("welcomeName").textContent = user.email;
+                            document.getElementById("lastLogin").textContent = new Date(user.metadata.lastSignInTime).toLocaleString();
+                        }
+                    });
+                })
+                .catch(function(error) {
+                    console.log(error.code, error.message);
+                });
+
+            // Logout functionality
+            document.getElementById("logoutButton").addEventListener("click", () => {
+                firebase.auth().signOut().then(() => {
+                    window.location.href = "landing.html"; // Redirect to login page after logging out
+                });
+            });
+
+        // Sidebar Toggle Functionality
+        document.getElementById('toggleSidebar').addEventListener('click', () => {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('w-16');
+            sidebar.classList.toggle('w-64');
+            lucide.createIcons();
+        });
+    </script>
+
+
+    </head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <aside id="sidebar">
+            <div class="p-4 border-b flex items-center justify-between">
+                <div class="flex items-center">
+                    <span class="font-bold text-lg">NovaTrace</span>
+                </div>
+            </div>
+
+            <div class="p-4 border-b">
+                <div class="flex flex-col items-center">
+                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-4">
+                        <i data-lucide="user" class="h-6 w-6 text-gray-600"></i>
+                    </div>
+                    <div id="user-info">
+                        <h2 id="userName" class="text-xl font-bold text-center"></h2>
+                        <p id="userRole" class="text-sm text-gray-600 text-center"></p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded">
+                            <i data-lucide="inbox" class="h-5 w-5"></i>
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded">
+                            <i data-lucide="bell" class="h-5 w-5"></i>
+                            <span>Notifications</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="flex items-center space-x-2 p-2 hover:bg-gray-100 rounded">
+                            <i data-lucide="settings" class="h-5 w-5"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button id="logoutButton" class="flex items-center space-x-2 p-2 hover:bg-red-50 rounded-lg transition-colors text-red-500 hover:text-red-600">
+                            <i data-lucide="log-out" class="h-5 w-5"></i>
+                            <span>Logout</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="flex-1 min-h-screen">
+            <div class="container">
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6 mt-6">
+                    <h1 class="text-2xl font-bold">Welcome back, <span id="welcomeName"></span></h1>
+                    <p class="text-gray-600">Last login: <span id="lastLogin"></span></p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="bg-white rounded-lg shadow-sm p-6 stats-card">
+                        <h2 class="text-lg font-semibold mb-2">Active Cases</h2>
+                        <p class="text-3xl font-bold text-blue-600">12</p>
+                        <p class="text-gray-600">Currently in progress</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6 stats-card">
+                        <h2 class="text-lg font-semibold mb-2">High Priority</h2>
+                        <p class="text-3xl font-bold text-red-600">3</p>
+                        <p class="text-gray-600">Require immediate attention</p>
+                    </div>
+
+                    <div class="bg-white rounded-lg shadow-sm p-6 stats-card">
+                        <h2 class="text-lg font-semibold mb-2">Completed This Month</h2>
+                        <p class="text-3xl font-bold text-green-600">8</p>
+                        <p class="text-gray-600">Cases resolved</p>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+                    <h2 class="text-xl font-bold mb-4">Recent Activity</h2>
+                    <div id="recentActivities" class="space-y-4">
+                    </div>
+                </div>
+
+                <div class="quick-actions-grid mb-6">
+                    <button id="newCaseButton" class="bg-gradient-to-r from-gray-950 to-indigo-950 text-white p-4 rounded-lg shadow-lg hover:from-indigo-900 hover:to-indigo-800 transition-all duration-300 flex items-center justify-center space-x-2 transform hover:-translate-y-1">
+                        <i data-lucide="plus-circle" class="action-icon"></i>
+                        New Case
+                    </button>
+                    <button id="openCasesButton" class="bg-gradient-to-r from-gray-950 to-indigo-950 text-white p-4 rounded-lg shadow-lg hover:from-indigo-900 hover:to-indigo-800 transition-all duration-300 flex items-center justify-center space-x-2 transform hover:-translate-y-1">
+                        <i data-lucide="folder-open" class="action-icon"></i>
+                        Open Cases
+                    </button>
+                    <button id="completedCasesButton" class="bg-gradient-to-r from-gray-950 to-indigo-950 text-white p-4 rounded-lg shadow-lg hover:from-indigo-900 hover:to-indigo-800 transition-all duration-300 flex items-center justify-center space-x-2 transform hover:-translate-y-1">
+                        <i data-lucide="check-circle" class="action-icon"></i>
+                        Completed Cases
+                    </button>
+                </div>
+            </div>
+            
+        </main>
+    </div>
+    
+
+    <script src="/assets/js/home.js"></script>
+    <script src="/assets/js/router.js"></script>
+    <script src="/assets/js/chatbot.js"></script>
+    
+    <script>
+        const chatWidget = new DFIRChatWidget('AIzaSyCF077hKEzNhf2aYGeC6he8vq-QpjSwAeA');
+    </script>
+    
+</body>
+</html>

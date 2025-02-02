@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>NovaTrace - Digital Forensics Platform</title>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+        <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+        <link rel="stylesheet" href="/assets/css/landing.css">
+       <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyD77IDHmttj8uPM31hGvKoTa5iCCpHC9HI",
+            authDomain: "techotrace-82ea4.firebaseapp.com",
+            databaseURL: "https://techotrace-82ea4-default-rtdb.firebaseio.com",
+            projectId: "techotrace-82ea4",
+            storageBucket: "techotrace-82ea4.firebasestorage.app",
+            messagingSenderId: "349936211188",
+            appId: "1:349936211188:web:facaead53e0bbd12fafaa1",
+            measurementId: "G-E7CL3PHVNE"
+            };
+        
+                    // Initialize Firebase
+                    const app = firebase.initializeApp(firebaseConfig);
+                    const auth = firebase.auth();
+                </script>
+    </head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-gradient-to-r from-gray-950 to-indigo-950">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i data-lucide="search" class="h-6 w-6 text-white mr-2"></i>
+                    <span class="text-xl font-bold text-white">NovaTrace</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="#features" class="text-gray-200 hover:text-white transition-colors">Features</a>
+                    <a href="#ftk-imager" class="text-gray-200 hover:text-white transition-colors">FTK Guide</a>
+                    <button id="loginBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-gray-950 to-indigo-950 text-white pt-24 pb-16 fade-in">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-10 lg:mb-0">
+                    <h1 class="text-4xl lg:text-5xl font-bold mb-6 slide-up">
+                        Advanced Digital Forensics Investigation Platform
+                    </h1>
+                    <p class="text-lg text-gray-200 mb-8 slide-up">
+                        Streamline your digital forensics workflow with powerful tools and intuitive interface.
+                    </p>
+                    <div class="space-y-3">
+                        <button id="getStartedBtn" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors slide-up group relative">
+                            Get Started
+                            <span class="absolute left-1/2 -translate-x-1/2 -bottom-8 hidden group-hover:block whitespace-nowrap">
+                                <span class="text-gray-300 text-sm font-light">✨ Login to proceed further</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 slide-in-right">
+                    <i data-lucide="shield" class="h-64 w-64 text-white mx-auto"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FTK Imager Guide Section -->
+    <section id="ftk-imager" class="section py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 text-center">FTK Imager Guide</h2>
+            <div class="max-w-3xl mx-auto">
+                <p>Learn how to create forensic disk images using 
+                    <a href="https://www.exterro.com/ftk-imager" class="text-blue-600 hover:underline" target="_blank">FTK Imager</a>
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">1</span>
+                            <h3 class="font-semibold">Create Image</h3>
+                        </div>
+                        <p>Select File > Create Disk Image and choose your source drive</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">2</span>
+                            <h3 class="font-semibold">Image Type</h3>
+                        </div>
+                        <p>Choose E01 format and set compression level</p>
+                    </div>
+
+                    <div class="bg-gray-50 p-6 rounded-lg">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">3</span>
+                            <h3 class="font-semibold">Evidence Item</h3>
+                        </div>
+                        <p>Fill in case details and start the imaging process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section py-16">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-12 text-center">Key Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mx-auto max-w-6xl">
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">Disk Analysis</h3>
+                    <p>Advanced disk imaging and analysis capabilities with support for multiple formats</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">File Recovery</h3>
+                    <p>Recover deleted files and reconstruct fragmented data with precision</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">Chain of Custody</h3>
+                    <p>Maintain detailed documentation and ensure evidence integrity</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">Case Management</h3>
+                    <p>Organize and track multiple cases with our intuitive management system</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">Report Generation</h3>
+                    <p>Create comprehensive reports with customizable templates</p>
+                </div>
+
+                <div class="feature-card">
+                    <h3 class="text-xl font-semibold mb-3">Secure Evidence Storage</h3>
+                    <p>Encrypted storage solutions for maintaining evidence integrity and confidentiality</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+        <div class="bg-gradient-to-b from-gray-950 to-indigo-950 rounded-xl p-8 max-w-md w-full mx-4 shadow-2xl transform transition-all">
+            <div class="text-center mb-8">
+                <div class="flex justify-end">
+                    <button id="closeModal" class="text-gray-400 hover:text-white">
+                        <span class="sr-only">Close</span>
+                        <!-- Close icon can be added here -->
+                    </button>
+                </div>
+                <h3 class="text-2xl font-bold text-white mb-2">Welcome Back</h3>
+                <p class="text-gray-300">Access your digital forensics workspace</p>
+            </div>
+
+            <form id="loginForm" class="space-y-6">
+                <div class="space-y-2">
+                    <label for="email" class="text-gray-200">Email</label>
+                    <input type="email" id="email" name="email" required class="w-full px-3 py-2 bg-gray-800 rounded-lg text-white">
+                </div>
+
+                <div class="space-y-2">
+                    <label for="password" class="text-gray-200">Password</label>
+                    <input type="password" id="password" name="password" required class="w-full px-3 py-2 bg-gray-800 rounded-lg text-white">
+                </div>
+
+                <div class="flex items-center justify-between text-sm">
+                    <label class="flex items-center text-gray-200">
+                        <input type="checkbox" class="mr-2">
+                        Remember me
+                    </label>
+                    <a href="#" class="text-blue-400 hover:text-blue-300 transition-colors">Forgot password?</a>
+                </div>
+
+                <div class="pt-4">
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                        Sign In
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const loginModal = document.getElementById("loginModal");
+            const loginBtn = document.getElementById("loginBtn");
+            const getStartedBtn = document.getElementById("getStartedBtn");
+            const closeModal = document.getElementById("closeModal");
+            const loginForm = document.getElementById("loginForm");
+            const togglePassword = document.getElementById("togglePassword");
+            const passwordInput = document.getElementById("password");
+
+            // Show/Hide Modal
+            const openLoginModal = () => loginModal.classList.remove("hidden");
+            loginBtn.addEventListener("click", openLoginModal);
+            getStartedBtn.addEventListener("click", openLoginModal);
+            closeModal.addEventListener("click", () => loginModal.classList.add("hidden"));
+
+            // Show/Hide Password
+            togglePassword.addEventListener("click", () => {
+                if (passwordInput.type === "password") {
+                    passwordInput.type = "text";
+                    togglePassword.textContent = "Hide";
+                } else {
+                    passwordInput.type = "password";
+                    togglePassword.textContent = "Show";
+                }
+            });
+
+            // Handle Login Form Submission
+            loginForm.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                try {
+                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                    alert(`Welcome, ${userCredential.user.email}`);
+                    loginModal.classList.add("hidden");
+                    window.location.href = "/home.html"; // Redirect to next page
+                } catch (error) {
+                    alert(`Error: ${error.message}`);
+                }
+            });
+        });
+   </script>
+           <script src="/assets/js/landing.js"></script>
+ 
+    </body>
+</html>
